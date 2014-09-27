@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NetworkNow</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="con">Connect!</string>
+    <string name="spinProm">Please Choose a Skill</string>
+    <string name="editText">UserName</string>
+    
+     <string-array name="skills_array">
+        <item>Design</item>
+        <item>Front-End</item>
+        <item>Back-End</item>
+        <item>Android</item>
+        <item>IOS</item>
+        <item>Windows Applications</item>
+    </string-array>
+
+</resources>
