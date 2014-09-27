@@ -57,6 +57,15 @@ public class MainActivity extends Activity {
         	   
         	   //check if bluetooth enabled
         	   BeaconManager beaconManager = new BeaconManager(getApplicationContext());
+        	   if(!beaconManager.hasBluetooth()){
+        		   Toast.makeText(getApplicationContext(), "It appears that you do not support bluetooth.", 
+            			   Toast.LENGTH_LONG).show();
+        	   
+        	   }
+        	   if(!beaconManager.isBluetoothEnabled()){
+        		   Toast.makeText(getApplicationContext(), "Please enable bluetooth and try again!", 
+            			   Toast.LENGTH_LONG).show();
+        	   }
            	//PUT and GET array stuffs here
 
            }
