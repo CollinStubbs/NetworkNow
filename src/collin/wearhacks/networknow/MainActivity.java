@@ -10,6 +10,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.estimote.sdk.BeaconManager;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -27,7 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
  
-public class MainActivity extends Activity implements OnItemSelectedListener {
+public class MainActivity extends Activity {
  
     EditText etResponse;
     TextView tvIsConnected;
@@ -51,6 +54,9 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
                // TODO Auto-generated method stub
         	   Toast.makeText(getApplicationContext(), spInt1+""+spInt2+""+spInt3, 
         			   Toast.LENGTH_LONG).show();
+        	   
+        	   //check if bluetooth enabled
+        	   BeaconManager beaconManager = new BeaconManager(getApplicationContext());
            	//PUT and GET array stuffs here
 
            }
@@ -179,11 +185,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         etResponse.setText(GET("http://hmkcode.com/examples/index.php"));*/
  
     }
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-    	}
-    
-    public void onNothingSelected(AdapterView<?> parent){
-    }
+   
 
  
     public static String GET(String url){
