@@ -57,7 +57,7 @@
         android:ems="10"
         android:hint="Password"
         android:gravity="center_horizontal"
-        android:inputType="textPersonName" >
+        android:inputType="textPassword"  >
 
         <requestFocus />
     </EditText>
@@ -74,7 +74,7 @@
         android:ems="10"
         android:hint="Confirm Password"
         android:gravity="center_horizontal"
-        android:inputType="textPersonName" >
+        android:inputType="textPassword" >
 
         <requestFocus />
     </EditText>
@@ -90,5 +90,7 @@
         android:background="@drawable/border"
         android:text="Submit"
         android:textColor="#DD000000" />
+
+   
     
 </LinearLayout>

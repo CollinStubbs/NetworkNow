@@ -30,9 +30,11 @@ public class Register extends ActionBarActivity {
 
 	           public void onClick(View v) {
 	        	  //if pass and confirm pass are equal
-	        	   if(passReg.toString().equals(passConfirmReg.toString())){
+	        	   if(passReg.getText().toString().equals(passConfirmReg.getText().toString())){
 	        		   
 	        	   //do http stuff here
+	        		   /*Intent intent = new Intent(getApplicationContext(), Homepage.class);
+        	  startActivity(intent);*/
 	        	   }
 	        	   else{
 	        		   Toast.makeText(getApplicationContext(), "Please make sure your passwords are the same.", 

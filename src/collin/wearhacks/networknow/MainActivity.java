@@ -62,9 +62,9 @@ public class MainActivity extends Activity {
         	    * 	Intent intent = new Intent(getApplicationContext(), Homepage.class);
         	  startActivity(intent);
         	    * }else{
-        	    * Intent intent = new Intent(getApplicationContext(), Register.class);
+        	     Intent intent = new Intent(getApplicationContext(), Register.class);
         	  startActivity(intent);
-        	    * }
+        	    //}
         	  
         	  */
            }
