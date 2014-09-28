@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
  
@@ -58,11 +59,21 @@ public class Homepage extends Activity {
         
         pro.setOnClickListener(new OnClickListener() {
 
-	           public void onClick(View v) {
+	           
+			@SuppressWarnings("deprecation")
+			public void onClick(View v) {
+					
 	        	   img.setImageDrawable(null);
+	        	   lay.removeAllViews();
 	        	   spin1.setVisibility(View.VISIBLE);
 	        	   spin2.setVisibility(View.VISIBLE);
 	        	   spin3.setVisibility(View.VISIBLE);
+	        	   
+	        	   Button but = new Button(getApplicationContext());
+	        	   but.setText("Update");
+	        	   but.setBackgroundResource(R.drawable.border);
+	        	   lay.addView(but);
+	        	   //update profile
 	        	   //profile();
 	           }
 	        });
@@ -70,6 +81,7 @@ public class Homepage extends Activity {
 
 	           public void onClick(View v) {
 	        	   img.setImageDrawable(null);
+	        	   lay.removeAllViews();
 	        	   
 	        	   //findEstimote();
 	           }
@@ -78,6 +90,7 @@ public class Homepage extends Activity {
 
 	           public void onClick(View v) {
 	        	   img.setImageDrawable(null);
+	        	   lay.removeAllViews();
 	        	   //logout();
 	           }
 	        });
