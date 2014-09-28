@@ -30,6 +30,7 @@ import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
  
 public class Homepage extends Activity {
  LinearLayout lay;
@@ -64,12 +65,18 @@ public class Homepage extends Activity {
 			@SuppressWarnings("deprecation")
 			public void onClick(View v) {
 					
+					
 	        	   img.setImageDrawable(null);
 	        	   lay.removeAllViews();
 	        	   spin1.setVisibility(View.VISIBLE);
 	        	   spin2.setVisibility(View.VISIBLE);
 	        	   spin3.setVisibility(View.VISIBLE);
 	        	   
+	        	   TextView tv = new TextView(getApplicationContext());
+					tv.setText("Please Add Your Skills");
+					tv.setTextColor(Color.BLACK);
+					lay.addView(tv);
+					
 	        	   Button but = new Button(getApplicationContext());
 	        	   but.setText("Update");
 	        	   but.setBackgroundResource(R.drawable.border);
