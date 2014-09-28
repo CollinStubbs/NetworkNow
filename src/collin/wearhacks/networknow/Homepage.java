@@ -36,6 +36,7 @@ import android.graphics.Color;
 public class Homepage extends Activity {
  LinearLayout lay;
  ImageView img;
+ String userName;
   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,19 @@ public class Homepage extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_homepage);
         
+        
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                userName= null;
+            } else {
+                userName= extras.getString("userName");
+            }
+        } else {
+            userName= (String) savedInstanceState.getSerializable("userName");
+        }
+        Toast.makeText(getApplicationContext(), userName, 
+				   Toast.LENGTH_LONG).show();
         lay = (LinearLayout)findViewById(R.id.layoutID);
         img = (ImageView)findViewById(R.id.logoHome);
         

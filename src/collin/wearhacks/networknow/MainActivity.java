@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
         	   //HTTP STUFF
         	   /* if(usernameFound && passwordMatches){
         	    */ 	Intent intent = new Intent(getApplicationContext(), Homepage.class);
+        	    intent.putExtra("userName", userName);
         	  startActivity(intent);
         	    /* }else{
         	     Intent intent = new Intent(getApplicationContext(), Register.class);
