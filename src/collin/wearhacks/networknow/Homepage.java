@@ -102,9 +102,10 @@ public class Homepage extends Activity {
 					
 	        	   Button but = new Button(getApplicationContext());
 	        	   but.setText("Update");
+	        	   but.setTextColor(Color.BLACK);
 	        	   but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT));
-	        	   but.setPadding(10, 10, 10, 10);
+	        	   but.setPadding(25, 10, 25, 10);
 	        	   but.setBackgroundResource(R.drawable.border);
 	        	   lay.addView(spin1);
 	        	   
