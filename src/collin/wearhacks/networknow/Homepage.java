@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -75,6 +76,7 @@ public class Homepage extends Activity {
 	        	   TextView tv = new TextView(getApplicationContext());
 					tv.setText("Please Add Your Skills");
 					tv.setTextColor(Color.BLACK);
+					tv.setGravity(Gravity.CENTER_HORIZONTAL);
 					lay.addView(tv);
 					
 	        	   Button but = new Button(getApplicationContext());
