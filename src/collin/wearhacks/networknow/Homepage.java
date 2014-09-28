@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +73,9 @@ public class Homepage extends Activity {
 	        	   Button but = new Button(getApplicationContext());
 	        	   but.setText("Update");
 	        	   but.setBackgroundResource(R.drawable.border);
+	        	   lay.addView(spin1);
+	        	   lay.addView(spin2);
+	        	   lay.addView(spin3);
 	        	   lay.addView(but);
 	        	   //update profile
 	        	   //profile();
