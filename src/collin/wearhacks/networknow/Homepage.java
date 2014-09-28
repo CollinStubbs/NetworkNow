@@ -125,6 +125,7 @@ public class Homepage extends Activity {
 	        		   public void onClick(View v){
 
 	    	        	   Intent intent = new Intent(getApplicationContext(), Peeps.class);
+	    	        	   intent.putExtra("userName", userName);
 	    	               startActivity(intent);
 	        		   }
 	        	   });
@@ -140,6 +141,7 @@ public class Homepage extends Activity {
 	        	   
 	        	   Intent intent = new Intent(getApplicationContext(), ListBeaconsActivity.class);
 	               intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, NotifyDemoActivity.class.getName());
+	               intent.putExtra("userName", userName);
 	               startActivity(intent);
 	        	   //findEstimote();
 	           }

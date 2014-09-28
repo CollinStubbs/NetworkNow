@@ -91,6 +91,7 @@ public class MainActivity extends Activity {
             StatusLine statusLine = response.getStatusLine();
 			 if(statusLine.getStatusCode() == HttpURLConnection.HTTP_OK){
 	            	Intent intent = new Intent(getApplicationContext(), Homepage.class);
+	            	intent.putExtra("userName", userName);
 	          	  startActivity(intent);
 	            }
 			 else{
