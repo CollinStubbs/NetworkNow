@@ -6,18 +6,27 @@
     android:background="#FFF5E0"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logotrans" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="6dp"
         android:text=" "
         android:background="@color/red"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
 	<TextView
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center_horizontal"
+	        android:layout_height="35dp"
+	        android:gravity="center"
 	        android:text="Register Your Account"
 	        android:background="@color/brown"
+	        android:textStyle="bold"
 	        android:textColor="#CC000000"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 	<TextView
@@ -27,7 +36,7 @@
 	        android:background="@color/red"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
    <View
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_width="wrap_content"
         android:background="@null"
         />
@@ -83,6 +92,7 @@
         android:layout_width="wrap_content"
         android:background="@null"
         />
+
     <Button
         android:id="@+id/submitReg"
         android:layout_width="match_parent"
@@ -90,7 +100,5 @@
         android:background="@drawable/border"
         android:text="Submit"
         android:textColor="#DD000000" />
-
-   
     
 </LinearLayout>

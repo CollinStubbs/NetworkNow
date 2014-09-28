@@ -8,6 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="collin.wearhacks.networknow.Peeps" 
+    android:background="@color/brown"
     android:id="@+id/peepslay">
     <ListView
               android:id="@+id/list"
