@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#99EEEFFF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:text=" "
+        android:background="@color/red"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Register Your Account"
+        android:background="@color/brown"
+        android:textColor="#CC000000"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:text=" "
+        android:background="@color/red"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+   <View
+        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        />
+
+  <EditText
+        android:id="@+id/usernameReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:ems="10"
+        android:hint="UserName"
+        android:gravity="center_horizontal"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+    <View
+        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        />
+    <EditText
+        android:id="@+id/passwordReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:ems="10"
+        android:hint="Password"
+        android:gravity="center_horizontal"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+    <View
+        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        />
+    <EditText
+        android:id="@+id/passwordConfReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:gravity="center_horizontal"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+    <View
+        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:text="Submit"
+        android:textColor="#DD000000" />
+    
+</LinearLayout>

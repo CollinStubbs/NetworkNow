@@ -18,5 +18,6 @@
     </string-array>
 
     <string name="title_activity_homepage">Homepage</string>
+    <string name="title_activity_register">Register</string>
 
 </resources>
