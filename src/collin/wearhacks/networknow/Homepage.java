@@ -4,12 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -38,7 +52,9 @@ public class Homepage extends Activity {
  LinearLayout lay;
  ImageView img;
  String userName;
- 
+ String role;
+ String wants;
+ String uid;
   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +68,14 @@ public class Homepage extends Activity {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 userName= null;
+                uid = null;
             } else {
                 userName= extras.getString("userName");
+                uid = extras.getString("uid");
             }
         } else {
             userName= (String) savedInstanceState.getSerializable("userName");
+            uid= (String) savedInstanceState.getSerializable("uid");
         }
         
         lay = (LinearLayout)findViewById(R.id.layoutID);
@@ -83,7 +102,10 @@ public class Homepage extends Activity {
 	        	   img.setImageDrawable(null);
 	        	   lay.removeAllViews();
 	        	   spin1.setVisibility(View.VISIBLE);
+	        	   
+	        	   
 	        	   spin2.setVisibility(View.VISIBLE);
+	        	   
 	        	
 	        	   
 	        	   TextView tv = new TextView(getApplicationContext());
@@ -123,10 +145,10 @@ public class Homepage extends Activity {
 	        	   
 	        	   but.setOnClickListener(new View.OnClickListener(){
 	        		   public void onClick(View v){
-
-	    	        	   Intent intent = new Intent(getApplicationContext(), Peeps.class);
-	    	        	   intent.putExtra("userName", userName);
-	    	               startActivity(intent);
+	        			   role = spin1.getSelectedItem().toString();
+	        			   wants = spin2.getSelectedItem().toString();
+	        			   PutUserTask task = new PutUserTask();
+	        			   task.execute();
 	        		   }
 	        	   });
 	        	   
@@ -138,7 +160,7 @@ public class Homepage extends Activity {
 	           public void onClick(View v) {
 	        	   img.setImageDrawable(null);
 	        	   lay.removeAllViews();
-	        	   
+	        
 	        	   Intent intent = new Intent(getApplicationContext(), ListBeaconsActivity.class);
 	               intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, NotifyDemoActivity.class.getName());
 	               intent.putExtra("userName", userName);
@@ -156,6 +178,56 @@ public class Homepage extends Activity {
 	        });
 
     }
+    class PutUserTask extends AsyncTask<Object, Void, HttpResponse> {
 
+  	  @Override
+  		protected HttpResponse doInBackground(Object... arg0) {
+  			
+  			HttpClient httpclient = new DefaultHttpClient();
+  			HttpPut httpput = new HttpPut("http://104.131.105.6:3000/edituser/");
+
+			try {
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("username", userName));
+                //nameValuePairs.add(new BasicNameValuePair("password", passWord));
+                nameValuePairs.add(new BasicNameValuePair("role", role));
+                nameValuePairs.add(new BasicNameValuePair("wants", wants));
+                httpput.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	            
+             // Execute HTTP Post Request
+               HttpResponse response = httpclient.execute(httpput);
+               return response;
+                } catch (IOException e) {
+	        	Log.e("app", "exception caught: ",e);
+	        }
+  			
+  			try {
+  	            HttpResponse response = httpclient.execute(httpput);
+  	            return response;
+  	            
+  	        } catch (MalformedURLException e){
+  	        	Log.e("app", "exception caught: ",e);
+  	        } catch (ClientProtocolException e) {
+  	        	Log.e("app", "exception caught: ",e);
+  	        } catch (IOException e) {
+  	        	Log.e("app", "exception caught: ",e);
+  	        }
+  			return null;
+  		}
+  		
+  		protected void onPostExecute(HttpResponse response){
+            StatusLine statusLine = response.getStatusLine();
+  			 if(statusLine.getStatusCode() == HttpURLConnection.HTTP_OK){
+  				Intent intent = new Intent(getApplicationContext(), Peeps.class);
+	        	   intent.putExtra("userName", userName);
+	        	   intent.putExtra("uid", uid);
+	               startActivity(intent);
+  	            }
+  			 else{
+      	   
+      	   }
+  		}
+        
+      }
 
 }

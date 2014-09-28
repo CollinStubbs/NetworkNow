@@ -244,11 +244,12 @@ int drawable door 0x7f02005a
 int drawable dot 0x7f02005b
 int drawable global 0x7f02005c
 int drawable ic_launcher 0x7f02005d
-int drawable logotrans 0x7f02005e
-int drawable logotransblack 0x7f02005f
-int drawable logotransinvert 0x7f020060
-int drawable logotranswhite 0x7f020061
-int drawable male 0x7f020062
+int drawable logoout 0x7f02005e
+int drawable logotrans 0x7f02005f
+int drawable logotransblack 0x7f020060
+int drawable logotransinvert 0x7f020061
+int drawable logotranswhite 0x7f020062
+int drawable male 0x7f020063
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b

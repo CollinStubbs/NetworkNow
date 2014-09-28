@@ -1,18 +1,31 @@
 package collin.wearhacks.networknow;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.Utils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 /**
@@ -24,6 +37,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
   private ArrayList<Beacon> beacons;
   private LayoutInflater inflater;
+  private Context context;
 
   String uid; 
   String userName;
@@ -35,6 +49,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
   public LeDeviceListAdapter(Context context) {
     this.inflater = LayoutInflater.from(context);
     this.beacons = new ArrayList<Beacon>();
+    this.context = context;
   }
 
   public void replaceWith(Collection<Beacon> newBeacons) {
@@ -71,7 +86,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
     Double distance = Math.round(Utils.computeAccuracy(beacon) * 100.0) / 100.0;
     holder.macTextView.setText(String.format("UUID: "+beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor()+"\n Distance: "+distance+" meters"));
     
-    uid = beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor()
+    uid = beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor();
 
 
   }
@@ -101,48 +116,43 @@ public class LeDeviceListAdapter extends BaseAdapter {
   }
 
 
-  class PutHotTask extends AsyncTask<Object, Void, JSONObject> {
+  class PutHotTask extends AsyncTask<Object, Void, HttpResponse> {
 
-    @Override
-    protected JSONObject doInBackground(Object... arg0) {
-      
-      HttpClient httpclient = new DefaultHttpClient();
-      HttpGet httpget = new HttpGet("http://104.131.105.6:3000/hotspot"+uid+"/username/"+userName);
-      int responseCode = -1;
-      JSONObject jsonResponse = null;
-      StringBuilder builder = new StringBuilder();
-      
-      
-      try {
-               HttpResponse response = httpclient.execute(httpget);
-               StatusLine statusLine = response.getStatusLine();
-               responseCode = statusLine.getStatusCode();
-               
-               if (responseCode == HttpURLConnection.HTTP_OK){
-                 HttpEntity entity = response.getEntity();
-                 InputStream content = entity.getContent();
-                 
-                 BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-                 String line;
-                 while ((line=reader.readLine())!=null){
-                   builder.append(line);
-                 }
-               }
-               
-
-                jsonResponse = new JSONObject(builder.toString());
-                } catch (IOException e) {
-            Log.e("app", "exception caught: ",e);
-          } catch (Exception e){
-            
-          }
-      return jsonResponse;
-    }
-    
-    protected void onPostExecute(JSONObject result){
-      mMatchData = result;
-          handleMatches();
-    }
+	  @Override
+		protected HttpResponse doInBackground(Object... arg0) {
+			
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpPut httpget = new HttpPut("http://104.131.105.6:3000/hotspot/"+uid + "/username/" + userName);
+			
+			
+			try {
+	            HttpResponse response = httpclient.execute(httpget);
+	            return response;
+	            
+	        } catch (MalformedURLException e){
+	        	Log.e("app", "exception caught: ",e);
+	        } catch (ClientProtocolException e) {
+	        	Log.e("app", "exception caught: ",e);
+	        } catch (IOException e) {
+	        	Log.e("app", "exception caught: ",e);
+	        }
+			return null;
+		}
+		
+		protected void onPostExecute(HttpResponse response){
+          StatusLine statusLine = response.getStatusLine();
+			 if(statusLine.getStatusCode() == HttpURLConnection.HTTP_OK){
+	            	Intent intent = new Intent(context.getApplicationContext(), Homepage.class);
+	            	intent.putExtra("userName", userName);
+	            	intent.putExtra("uid", uid);
+	          	  context.startActivity(intent);
+	            }
+			 else{
+    		   Toast.makeText(context.getApplicationContext(), "Invalid User/Pass Combination", 
+    				   Toast.LENGTH_LONG).show();
+    	   
+    	   }
+		}
       
     }
 }

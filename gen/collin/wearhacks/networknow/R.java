@@ -1089,11 +1089,12 @@ containing a value of this type.
         public static final int dot=0x7f02005b;
         public static final int global=0x7f02005c;
         public static final int ic_launcher=0x7f02005d;
-        public static final int logotrans=0x7f02005e;
-        public static final int logotransblack=0x7f02005f;
-        public static final int logotransinvert=0x7f020060;
-        public static final int logotranswhite=0x7f020061;
-        public static final int male=0x7f020062;
+        public static final int logoout=0x7f02005e;
+        public static final int logotrans=0x7f02005f;
+        public static final int logotransblack=0x7f020060;
+        public static final int logotransinvert=0x7f020061;
+        public static final int logotranswhite=0x7f020062;
+        public static final int male=0x7f020063;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;

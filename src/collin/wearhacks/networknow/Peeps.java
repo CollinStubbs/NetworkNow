@@ -35,8 +35,8 @@ import android.widget.Toast;
 public class Peeps extends ActionBarActivity {
 	String temp[] = {"Ss", "gg"};
 	ListView list;
-	String userName;
-	String hotspot = "b9407f30-f5f8-466e-aff9-25556b57fe6d5555522222";
+	String userName;//, uid;
+	String uid = "b9407f30-f5f8-466e-aff9-25556b57fe6d5555522222";
 	protected JSONObject mMatchData = null;
 	
 	
@@ -49,11 +49,14 @@ public class Peeps extends ActionBarActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 userName= null;
+             //   uid = null;
             } else {
                 userName= extras.getString("userName");
+               // uid = extras.getString("uid");
             }
         } else {
             userName= (String) savedInstanceState.getSerializable("userName");
+           // uid = (String) savedInstanceState.getSerializable("uid");
         }
 		
 		
@@ -109,34 +112,7 @@ public class Peeps extends ActionBarActivity {
 			}
 				
 				
-			/*ArrayList<String> peeps = new ArrayList<String>();
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, temp);
-			 list = (ListView) findViewById(R.id.list);
-			 list.setAdapter(adapter);
-			 //g
-			  list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-				  
-	              public void onItemClick(AdapterView<?> parent, View view,
-	                 int position, long id) {
-	                
-	               // ListView Clicked item index
-	            	  //hh
-	               int itemPosition     = position;
-	               
-	               // ListView Clicked item value
-	               String  itemValue    = (String) list.getItemAtPosition(position);
-	                  
-	                // Show Alert 
-	                Toast.makeText(getApplicationContext(),
-	                  "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-	                  .show();
-	             
-	              }
-
-	         });
-			} catch (Exception e){
-				
-			}*/
+			
 		}
 	}
 	
@@ -146,7 +122,7 @@ public class Peeps extends ActionBarActivity {
 		protected JSONObject doInBackground(Object... arg0) {
 			
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpGet httpget = new HttpGet("http://104.131.105.6:3000/matches/"+userName+"/hotspot/"+hotspot);
+			HttpGet httpget = new HttpGet("http://104.131.105.6:3000/matches/"+userName+"/hotspot/"+uid);
 			int responseCode = -1;
 			JSONObject jsonResponse = null;
 			StringBuilder builder = new StringBuilder();
