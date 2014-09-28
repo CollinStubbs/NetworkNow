@@ -1,5 +1,6 @@
 package collin.wearhacks.networknow;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
@@ -39,7 +40,8 @@ public class ListBeaconsActivity extends Activity {
   private BeaconManager beaconManager;
   private LeDeviceListAdapter adapter;
 
-  @Override
+  @SuppressLint("ResourceAsColor")
+@Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
@@ -48,6 +50,7 @@ public class ListBeaconsActivity extends Activity {
     // Configure device list.
     adapter = new LeDeviceListAdapter(this);
     ListView list = (ListView) findViewById(R.id.device_list);
+    list.setBackgroundColor(R.color.brown);
     list.setAdapter(adapter);
     list.setOnItemClickListener(createOnItemClickListener());
 

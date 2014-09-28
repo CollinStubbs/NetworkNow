@@ -67,7 +67,9 @@ public class Homepage extends Activity {
         ImageButton log = (ImageButton) findViewById(R.id.logout);
         
         final Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
+        final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
         spin1.setVisibility(View.GONE);
+        spin2.setVisibility(View.GONE);
        
         
         
@@ -81,23 +83,43 @@ public class Homepage extends Activity {
 	        	   img.setImageDrawable(null);
 	        	   lay.removeAllViews();
 	        	   spin1.setVisibility(View.VISIBLE);
+	        	   spin2.setVisibility(View.VISIBLE);
 	        	
 	        	   
 	        	   TextView tv = new TextView(getApplicationContext());
 					tv.setText("Please Add Your Skills");
 					tv.setTextSize(25);
+					tv.setPadding(10, 10, 20, 10);
 					tv.setTypeface(null, Typeface.BOLD);
 					tv.setTextColor(Color.BLACK);
 					tv.setGravity(Gravity.CENTER_HORIZONTAL);
 					lay.addView(tv);
 					
+					LinearLayout li = new LinearLayout(getApplicationContext());
+					li.setOrientation(LinearLayout.HORIZONTAL);
+					li.setGravity(Gravity.CENTER);
+					li.setLayoutParams( new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+					
 	        	   Button but = new Button(getApplicationContext());
 	        	   but.setText("Update");
+	        	   but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT));
 	        	   but.setPadding(10, 10, 10, 10);
 	        	   but.setBackgroundResource(R.drawable.border);
 	        	   lay.addView(spin1);
 	        	   
-	        	   lay.addView(but);
+	        	   TextView tv2 = new TextView(getApplicationContext());
+					tv2.setText("What Do You Need?");
+					tv2.setTextSize(25);
+					tv2.setPadding(10, 10, 20, 10);
+					tv2.setTypeface(null, Typeface.BOLD);
+					tv2.setTextColor(Color.BLACK);
+					tv2.setGravity(Gravity.CENTER_HORIZONTAL);
+					lay.addView(tv2);
+	        	   lay.addView(spin2);
+	        	   lay.addView(li);
+	        	   li.addView(but);
+	        	   
 	        	   //update profile
 	        	   //profile();
 	           }

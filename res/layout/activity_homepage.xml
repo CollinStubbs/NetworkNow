@@ -59,6 +59,17 @@
 	        android:layout_height="wrap_content"
 	        android:entries="@array/skills_array"
 	        android:prompt="@string/spinProm" />
+   	    
+   	    <Spinner
+	        android:id="@+id/spinner2"
+	        android:paddingTop="30dp"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:gravity="center_horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:entries="@array/skills_array"
+	        android:prompt="@string/spinProm" />
    
    	</LinearLayout>
 
