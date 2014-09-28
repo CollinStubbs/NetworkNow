@@ -59,9 +59,9 @@ public class MainActivity extends Activity {
               //have this open new activity
         	   //HTTP STUFF
         	   /* if(usernameFound && passwordMatches){
-        	    * 	Intent intent = new Intent(getApplicationContext(), Homepage.class);
+        	    */ 	Intent intent = new Intent(getApplicationContext(), Homepage.class);
         	  startActivity(intent);
-        	    * }else{
+        	    /* }else{
         	     Intent intent = new Intent(getApplicationContext(), Register.class);
         	  startActivity(intent);
         	    //}

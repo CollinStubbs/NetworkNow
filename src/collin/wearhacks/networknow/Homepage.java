@@ -47,21 +47,34 @@ public class Homepage extends Activity {
         ImageButton find = (ImageButton) findViewById(R.id.findButton);
         ImageButton log = (ImageButton) findViewById(R.id.logout);
         
+        Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
+        Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
+        Spinner spin3 = (Spinner) findViewById(R.id.spinner3);
+        
+        spin1.setVisibility(View.GONE);
+        spin2.setVisibility(View.GONE);
+        spin3.setVisibility(View.GONE);
+        
+        
         pro.setOnClickListener(new OnClickListener() {
 
 	           public void onClick(View v) {
+	        	   img.setImageDrawable(null);
+	        	   
 	        	   //profile();
 	           }
 	        });
         find.setOnClickListener(new OnClickListener() {
 
 	           public void onClick(View v) {
+	        	   img.setImageDrawable(null);
 	        	   //findEstimote();
 	           }
 	        });
         log.setOnClickListener(new OnClickListener() {
 
 	           public void onClick(View v) {
+	        	   img.setImageDrawable(null);
 	        	   //logout();
 	           }
 	        });
