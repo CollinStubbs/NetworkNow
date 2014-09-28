@@ -7,8 +7,8 @@
     <string name="con">Connect!</string>
     <string name="spinProm">Please Choose a Skill</string>
     <string name="editText">UserName</string>
-    
-     <string-array name="skills_array">
+
+    <string-array name="skills_array">
         <item>Design</item>
         <item>Front-End</item>
         <item>Back-End</item>
@@ -16,5 +16,7 @@
         <item>IOS</item>
         <item>Windows Applications</item>
     </string-array>
+
+    <string name="title_activity_homepage">Homepage</string>
 
 </resources>
