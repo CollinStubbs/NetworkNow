@@ -61,6 +61,7 @@ public class HTTPRequests{
       
 		}catch(JSONException e){
 			e.printStackTrace();
+			Log.w("ERROR", "No Data found" );
 		}
 		return array_spinner;
 	}
