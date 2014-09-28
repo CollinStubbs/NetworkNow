@@ -17,5 +17,7 @@
 
     <string name="title_activity_homepage">Homepage</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_user_list">UserList</string>
+    <string name="title_activity_estibuddy">Estibuddy</string>
 
 </resources>
