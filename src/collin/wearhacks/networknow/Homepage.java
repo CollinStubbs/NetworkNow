@@ -32,11 +32,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
  
 public class Homepage extends Activity {
  LinearLayout lay;
  ImageView img;
  String userName;
+ 
   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,7 @@ public class Homepage extends Activity {
         } else {
             userName= (String) savedInstanceState.getSerializable("userName");
         }
-        Toast.makeText(getApplicationContext(), userName, 
-				   Toast.LENGTH_LONG).show();
+        
         lay = (LinearLayout)findViewById(R.id.layoutID);
         img = (ImageView)findViewById(R.id.logoHome);
         
@@ -66,12 +67,8 @@ public class Homepage extends Activity {
         ImageButton log = (ImageButton) findViewById(R.id.logout);
         
         final Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
-        final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
-        final Spinner spin3 = (Spinner) findViewById(R.id.spinner3);
-        
-         spin1.setVisibility(View.GONE);
-        spin2.setVisibility(View.GONE);
-         spin3.setVisibility(View.GONE);
+        spin1.setVisibility(View.GONE);
+       
         
         
         pro.setOnClickListener(new OnClickListener() {
@@ -84,21 +81,22 @@ public class Homepage extends Activity {
 	        	   img.setImageDrawable(null);
 	        	   lay.removeAllViews();
 	        	   spin1.setVisibility(View.VISIBLE);
-	        	   spin2.setVisibility(View.VISIBLE);
-	        	   spin3.setVisibility(View.VISIBLE);
+	        	
 	        	   
 	        	   TextView tv = new TextView(getApplicationContext());
 					tv.setText("Please Add Your Skills");
+					tv.setTextSize(25);
+					tv.setTypeface(null, Typeface.BOLD);
 					tv.setTextColor(Color.BLACK);
 					tv.setGravity(Gravity.CENTER_HORIZONTAL);
 					lay.addView(tv);
 					
 	        	   Button but = new Button(getApplicationContext());
 	        	   but.setText("Update");
+	        	   but.setPadding(10, 10, 10, 10);
 	        	   but.setBackgroundResource(R.drawable.border);
 	        	   lay.addView(spin1);
-	        	   lay.addView(spin2);
-	        	   lay.addView(spin3);
+	        	   
 	        	   lay.addView(but);
 	        	   //update profile
 	        	   //profile();

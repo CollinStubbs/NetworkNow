@@ -9,12 +9,10 @@
     <string name="editText">UserName</string>
 
     <string-array name="skills_array">
-        <item>Design</item>
-        <item>Front-End</item>
-        <item>Back-End</item>
-        <item>Android</item>
-        <item>IOS</item>
-        <item>Windows Applications</item>
+        <item>Business Developer</item>
+        <item>Developer</item>
+        <item>Designer</item>
+        <item>Project Manager</item>
     </string-array>
 
     <string name="title_activity_homepage">Homepage</string>
