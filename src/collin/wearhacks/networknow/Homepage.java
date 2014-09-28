@@ -47,20 +47,22 @@ public class Homepage extends Activity {
         ImageButton find = (ImageButton) findViewById(R.id.findButton);
         ImageButton log = (ImageButton) findViewById(R.id.logout);
         
-        Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
-        Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
-        Spinner spin3 = (Spinner) findViewById(R.id.spinner3);
+        final Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
+        final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
+        final Spinner spin3 = (Spinner) findViewById(R.id.spinner3);
         
-        spin1.setVisibility(View.GONE);
+         spin1.setVisibility(View.GONE);
         spin2.setVisibility(View.GONE);
-        spin3.setVisibility(View.GONE);
+         spin3.setVisibility(View.GONE);
         
         
         pro.setOnClickListener(new OnClickListener() {
 
 	           public void onClick(View v) {
 	        	   img.setImageDrawable(null);
-	        	   
+	        	   spin1.setVisibility(View.VISIBLE);
+	        	   spin2.setVisibility(View.VISIBLE);
+	        	   spin3.setVisibility(View.VISIBLE);
 	        	   //profile();
 	           }
 	        });
@@ -68,6 +70,7 @@ public class Homepage extends Activity {
 
 	           public void onClick(View v) {
 	        	   img.setImageDrawable(null);
+	        	   
 	        	   //findEstimote();
 	           }
 	        });
