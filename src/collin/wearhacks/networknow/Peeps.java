@@ -1,61 +1,64 @@
 package collin.wearhacks.networknow;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.support.v7.app.ActionBarActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+//import android.support.v7.internal.widget.AdapterViewICS.OnItemClickListener;
 
 public class Peeps extends ActionBarActivity {
-	String temp[];
+	String temp[] = {"Ss", "gg"};
 	ListView list;
+	String userName;
+	String hotspot = "b9407f30-f5f8-466e-aff9-25556b57fe6d5555522222";
+	protected JSONObject mMatchData = null;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_peeps);
-		ArrayList<String> peeps = new ArrayList<String>();
-		HTTPRequests c = new HTTPRequests();
-		String userMatches = "http://104.131.105.6:3000/matches/weeks/hotspot/b9407f30-f5f8-466e-aff9-25556b57fe6d5555522222";
-		try {
-			temp = c.JSON2Array(c.getJSON(userMatches));
-			for(int i = 0; i<temp.length; i++){
-				peeps.add(temp[i]);
-			}
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-	              android.R.layout.simple_list_item_1, android.R.id.text1, temp);
-		 list = (ListView) findViewById(R.id.list);
-		 list.setAdapter(adapter);
-		  list.setOnItemClickListener(new OnItemClickListener() {
-			  
-              @Override
-              public void onItemClick(AdapterView<?> parent, View view,
-                 int position, long id) {
-                
-               // ListView Clicked item index
-               int itemPosition     = position;
-               
-               // ListView Clicked item value
-               String  itemValue    = (String) listView.getItemAtPosition(position);
-                  
-                // Show Alert 
-                Toast.makeText(getApplicationContext(),
-                  "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                  .show();
-             
-              }
-
-         }); 
 		
+		if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                userName= null;
+            } else {
+                userName= extras.getString("userName");
+            }
+        } else {
+            userName= (String) savedInstanceState.getSerializable("userName");
+        }
+		
+		
+ 	    HotspotMatchTask task = new HotspotMatchTask();
+    	task.execute(); 
 	}
 
 	@Override
@@ -76,4 +79,109 @@ public class Peeps extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public void handleMatches(){
+		if (mMatchData == null){
+			
+		} else {
+			try{
+				JSONArray jsonMatches = mMatchData.getJSONArray("matches");
+				ArrayList<HashMap<String,String>> matches = new ArrayList<HashMap<String,String>>();
+				for(int i =0; i<jsonMatches.length(); i++){
+					JSONObject match = jsonMatches.getJSONObject(i);
+					String username = match.getString("username");
+					
+					String role = match.getString("role");
+					
+					HashMap<String, String> matchItem = new HashMap<String, String>();
+					matchItem.put("username", username);
+					matchItem.put("role", role);
+					
+					matches.add(matchItem);
+				}
+				String[] keys = {"username", "role"};
+				int[] ids = {android.R.id.text1, android.R.id.text2};
+				SimpleAdapter adapter = new SimpleAdapter (this, matches,
+						android.R.layout.simple_list_item_2, keys, ids);
+				list.setAdapter(adapter);
+			} catch (JSONException e) {
+				Log.e("List", "Exception caught", e);
+			}
+				
+				
+			/*ArrayList<String> peeps = new ArrayList<String>();
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, temp);
+			 list = (ListView) findViewById(R.id.list);
+			 list.setAdapter(adapter);
+			 //g
+			  list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+				  
+	              public void onItemClick(AdapterView<?> parent, View view,
+	                 int position, long id) {
+	                
+	               // ListView Clicked item index
+	            	  //hh
+	               int itemPosition     = position;
+	               
+	               // ListView Clicked item value
+	               String  itemValue    = (String) list.getItemAtPosition(position);
+	                  
+	                // Show Alert 
+	                Toast.makeText(getApplicationContext(),
+	                  "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+	                  .show();
+	             
+	              }
+
+	         });
+			} catch (Exception e){
+				
+			}*/
+		}
+	}
+	
+	class HotspotMatchTask extends AsyncTask<Object, Void, JSONObject> {
+
+		@Override
+		protected JSONObject doInBackground(Object... arg0) {
+			
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpGet httpget = new HttpGet("http://104.131.105.6:3000/matches/"+userName+"/hotspot/"+hotspot);
+			int responseCode = -1;
+			JSONObject jsonResponse = null;
+			StringBuilder builder = new StringBuilder();
+			
+			
+			try {
+               HttpResponse response = httpclient.execute(httpget);
+               StatusLine statusLine = response.getStatusLine();
+               responseCode = statusLine.getStatusCode();
+               
+               if (responseCode == HttpURLConnection.HTTP_OK){
+            	   HttpEntity entity = response.getEntity();
+            	   InputStream content = entity.getContent();
+            	   
+            	   BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+            	   String line;
+            	   while ((line=reader.readLine())!=null){
+            		   builder.append(line);
+            	   }
+               }
+               
+
+              	jsonResponse = new JSONObject(builder.toString());
+                } catch (IOException e) {
+	        	Log.e("app", "exception caught: ",e);
+	        }	catch (Exception e){
+	        	
+	        }
+			return jsonResponse;
+		}
+		
+		protected void onPostExecute(JSONObject result){
+		 	mMatchData = result;
+        	handleMatches();
+		}
+    	
+    }
 }
