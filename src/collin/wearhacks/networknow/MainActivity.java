@@ -69,7 +69,17 @@ public class MainActivity extends Activity {
         	  */
            }
         });
-        
+        Button button2 = (Button) findViewById(R.id.register);
+        button2.setOnClickListener(new OnClickListener() {
+
+           public void onClick(View v) {
+        	         	   
+              
+        	     Intent intent = new Intent(getApplicationContext(), Register.class);
+        	  startActivity(intent);
+        	    
+           }
+        });
        
  
     }
