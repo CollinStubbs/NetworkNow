@@ -76,6 +76,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
   @Override
   public View getView(int position, View view, ViewGroup parent) {
     view = inflateIfRequired(view, position, parent);
+    
     bind(getItem(position), view);
     return view;
   }
@@ -84,11 +85,11 @@ public class LeDeviceListAdapter extends BaseAdapter {
     ViewHolder holder = (ViewHolder) view.getTag();
     // Print the UUID and Distance
     Double distance = Math.round(Utils.computeAccuracy(beacon) * 100.0) / 100.0;
+    uid = beacon.getProximityUUID()+beacon.getMajor()+beacon.getMajor();
+    PutHotTask task = new PutHotTask();
+    task.execute(uid);
     holder.macTextView.setText(String.format("UUID: "+beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor()+"\n Distance: "+distance+" meters"));
     
-    uid = beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor();
-
-
   }
 
   private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -116,14 +117,14 @@ public class LeDeviceListAdapter extends BaseAdapter {
   }
 
 
-  class PutHotTask extends AsyncTask<Object, Void, HttpResponse> {
-
+  class PutHotTask extends AsyncTask<String, Void, HttpResponse> {
+	  String uidOut;
 	  @Override
-		protected HttpResponse doInBackground(Object... arg0) {
+		protected HttpResponse doInBackground(String... param) {
 			
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPut httpget = new HttpPut("http://104.131.105.6:3000/hotspot/"+uid + "/username/" + userName);
-			
+			uidOut = param[0];
 			
 			try {
 	            HttpResponse response = httpclient.execute(httpget);
@@ -141,16 +142,14 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		
 		protected void onPostExecute(HttpResponse response){
           StatusLine statusLine = response.getStatusLine();
-			 if(statusLine.getStatusCode() == HttpURLConnection.HTTP_OK){
-	            	Intent intent = new Intent(context.getApplicationContext(), Homepage.class);
-	            	intent.putExtra("userName", userName);
-	            	intent.putExtra("uid", uid);
-	          	  context.startActivity(intent);
-	            }
+          if(statusLine.getStatusCode() == HttpURLConnection.HTTP_OK){
+				Intent intent = new Intent(context.getApplicationContext(), Homepage.class);
+				intent.putExtra("userName", userName);
+				intent.putExtra("uid", uidOut);
+			  	  context.startActivity(intent);
+			    }
 			 else{
-    		   Toast.makeText(context.getApplicationContext(), "Invalid User/Pass Combination", 
-    				   Toast.LENGTH_LONG).show();
-    	   
+				 
     	   }
 		}
       

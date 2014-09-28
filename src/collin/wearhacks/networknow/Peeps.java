@@ -36,7 +36,7 @@ public class Peeps extends ActionBarActivity {
 	String temp[] = {"Ss", "gg"};
 	ListView list;
 	String userName;//, uid;
-	String uid = "b9407f30-f5f8-466e-aff9-25556b57fe6d5555522222";
+	String uid;
 	protected JSONObject mMatchData = null;
 	
 	
@@ -49,14 +49,14 @@ public class Peeps extends ActionBarActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 userName= null;
-             //   uid = null;
+                uid = null;
             } else {
                 userName= extras.getString("userName");
-               // uid = extras.getString("uid");
+               uid = extras.getString("uid");
             }
         } else {
             userName= (String) savedInstanceState.getSerializable("userName");
-           // uid = (String) savedInstanceState.getSerializable("uid");
+           uid = (String) savedInstanceState.getSerializable("uid");
         }
 		
 		
