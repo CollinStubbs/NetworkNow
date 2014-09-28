@@ -25,6 +25,13 @@ public class LeDeviceListAdapter extends BaseAdapter {
   private ArrayList<Beacon> beacons;
   private LayoutInflater inflater;
 
+  String uid; 
+  String userName;
+
+  public void setUserName(String name){
+    userName = name;
+  }
+
   public LeDeviceListAdapter(Context context) {
     this.inflater = LayoutInflater.from(context);
     this.beacons = new ArrayList<Beacon>();
@@ -63,11 +70,10 @@ public class LeDeviceListAdapter extends BaseAdapter {
     // Print the UUID and Distance
     Double distance = Math.round(Utils.computeAccuracy(beacon) * 100.0) / 100.0;
     holder.macTextView.setText(String.format("UUID: "+beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor()+"\n Distance: "+distance+" meters"));
-//    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
-//    holder.majorTextView.setText("Major: " + beacon.getMajor());
-//    holder.minorTextView.setText("Minor: " + beacon.getMinor());
-//    holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-//    holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+    
+    uid = beacon.getProximityUUID()+beacon.getMajor()+beacon.getMinor()
+
+
   }
 
   private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -93,4 +99,50 @@ public class LeDeviceListAdapter extends BaseAdapter {
       rssiTextView = (TextView) view.findViewWithTag("rssi");
     }
   }
+
+
+  class PutHotTask extends AsyncTask<Object, Void, JSONObject> {
+
+    @Override
+    protected JSONObject doInBackground(Object... arg0) {
+      
+      HttpClient httpclient = new DefaultHttpClient();
+      HttpGet httpget = new HttpGet("http://104.131.105.6:3000/hotspot"+uid+"/username/"+userName);
+      int responseCode = -1;
+      JSONObject jsonResponse = null;
+      StringBuilder builder = new StringBuilder();
+      
+      
+      try {
+               HttpResponse response = httpclient.execute(httpget);
+               StatusLine statusLine = response.getStatusLine();
+               responseCode = statusLine.getStatusCode();
+               
+               if (responseCode == HttpURLConnection.HTTP_OK){
+                 HttpEntity entity = response.getEntity();
+                 InputStream content = entity.getContent();
+                 
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                 String line;
+                 while ((line=reader.readLine())!=null){
+                   builder.append(line);
+                 }
+               }
+               
+
+                jsonResponse = new JSONObject(builder.toString());
+                } catch (IOException e) {
+            Log.e("app", "exception caught: ",e);
+          } catch (Exception e){
+            
+          }
+      return jsonResponse;
+    }
+    
+    protected void onPostExecute(JSONObject result){
+      mMatchData = result;
+          handleMatches();
+    }
+      
+    }
 }

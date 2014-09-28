@@ -29,6 +29,8 @@ import java.util.List;
  */
 public class ListBeaconsActivity extends Activity {
 
+  String userName;
+
   private static final String TAG = ListBeaconsActivity.class.getSimpleName();
 
   public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
@@ -47,8 +49,24 @@ public class ListBeaconsActivity extends Activity {
     setContentView(R.layout.main);
     getActionBar().setDisplayHomeAsUpEnabled(true);
 
+    // Get the username
+    if (savedInstanceState == null) {
+      Bundle extras = getIntent().getExtras();
+      if(extras == null) {
+        userName= null;
+      } else {
+        userName= extras.getString("userName");
+      }
+    } else {
+      userName= (String) savedInstanceState.getSerializable("userName");
+    }
+
     // Configure device list.
     adapter = new LeDeviceListAdapter(this);
+    
+    // Pass the username to LeDeviceListAdapter
+    adapter.setUserName(userName);
+    
     ListView list = (ListView) findViewById(R.id.device_list);
     list.setBackgroundColor(R.color.brown);
     list.setAdapter(adapter);
