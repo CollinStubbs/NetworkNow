@@ -4,6 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class Register extends ActionBarActivity {
 
@@ -11,6 +16,32 @@ public class Register extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		  	final EditText userReg = (EditText)findViewById(R.id.usernameReg);
+	        userReg.setTextColor(0xAA000000);
+	        
+	        final EditText passReg = (EditText)findViewById(R.id.passwordReg);
+	        passReg.setTextColor(0xAA000000);
+	        
+	        final EditText passConfirmReg = (EditText) findViewById(R.id.passwordConfReg);
+	        passConfirmReg.setTextColor(0xAA000000);
+	        
+	        Button buttonSub = (Button) findViewById(R.id.submitReg);
+	        buttonSub.setOnClickListener(new OnClickListener() {
+
+	           public void onClick(View v) {
+	        	  //if pass and confirm pass are equal
+	        	   if(passReg.toString().equals(passConfirmReg.toString())){
+	        		   
+	        	   //do http stuff here
+	        	   }
+	        	   else{
+	        		   Toast.makeText(getApplicationContext(), "Please make sure your passwords are the same.", 
+	        				   Toast.LENGTH_LONG).show();
+	        	   
+	        	   }
+	           }
+	        });
+		
 	}
 
 	@Override
