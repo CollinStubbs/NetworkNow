@@ -121,8 +121,15 @@ public class Homepage extends Activity {
 	        	   lay.addView(li);
 	        	   li.addView(but);
 	        	   
-	        	   //update profile
-	        	   //profile();
+	        	   but.setOnClickListener(new View.OnClickListener(){
+	        		   public void onClick(View v){
+
+	    	        	   Intent intent = new Intent(getApplicationContext(), Peeps.class);
+	    	               startActivity(intent);
+	        		   }
+	        	   });
+	        	   
+	        	    
 	           }
 	        });
         find.setOnClickListener(new OnClickListener() {

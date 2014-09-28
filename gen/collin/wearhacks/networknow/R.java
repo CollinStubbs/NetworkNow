@@ -1235,19 +1235,21 @@ containing a value of this type.
         public static final int actionbar_indeterminate_progress=0x7f030018;
         public static final int activity_homepage=0x7f030019;
         public static final int activity_main=0x7f03001a;
-        public static final int activity_register=0x7f03001b;
-        public static final int all_demos=0x7f03001c;
-        public static final int characteristics_demo=0x7f03001d;
-        public static final int device_item=0x7f03001e;
-        public static final int main=0x7f03001f;
-        public static final int notify_demo=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int activity_peeps=0x7f03001b;
+        public static final int activity_register=0x7f03001c;
+        public static final int all_demos=0x7f03001d;
+        public static final int characteristics_demo=0x7f03001e;
+        public static final int device_item=0x7f03001f;
+        public static final int main=0x7f030020;
+        public static final int notify_demo=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class menu {
         public static final int homepage=0x7f0d0000;
         public static final int main=0x7f0d0001;
-        public static final int register=0x7f0d0002;
-        public static final int scan_menu=0x7f0d0003;
+        public static final int peeps=0x7f0d0002;
+        public static final int register=0x7f0d0003;
+        public static final int scan_menu=0x7f0d0004;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1297,6 +1299,7 @@ containing a value of this type.
         public static final int hello_world=0x7f0a000e;
         public static final int spinProm=0x7f0a0011;
         public static final int title_activity_homepage=0x7f0a0013;
+        public static final int title_activity_peeps=0x7f0a0015;
         public static final int title_activity_register=0x7f0a0014;
     }
     public static final class style {
