@@ -41,7 +41,20 @@
    		    android:src="@drawable/door" />
    	    
    	</LinearLayout>
+   	<LinearLayout
+   	    android:id="@+id/layoutID"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"
+   	    android:orientation="vertical">
+   	    
+   	    
+   	</LinearLayout>
 
-    
+   	<ImageView
+   	    android:paddingTop="40dp"
+   	    android:id="@+id/logoHome"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:src="@drawable/logotransblack" />
     
 </LinearLayout>
