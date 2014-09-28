@@ -30,226 +30,50 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
+import android.content.Intent;
  
 public class MainActivity extends Activity {
  
-    EditText etResponse;
-    TextView tvIsConnected;
-    int spInt1, spInt2, spInt3;
-    String PUUID;
-    ArrayList<String> arrays = new ArrayList<String>();
+    String userName, passWord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //ww
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         
  
-        EditText editText = (EditText)findViewById(R.id.notaspinner);
-        //editText.setText("UserName", TextView.BufferType.EDITABLE);	
-        editText.setTextColor(0xAA000000);
+        final EditText user = (EditText)findViewById(R.id.username);
+        user.setTextColor(0xAA000000);
+        
+        final EditText pass = (EditText)findViewById(R.id.password);
+        pass.setTextColor(0xAA000000);
         
         Button button = (Button) findViewById(R.id.submit);
         button.setOnClickListener(new OnClickListener() {
 
            public void onClick(View v) {
-               // TODO Auto-generated method stub
-        	   Toast.makeText(getApplicationContext(), spInt1+""+spInt2+""+spInt3, 
-        			   Toast.LENGTH_LONG).show();
+        	   userName = user.getText().toString();
+        	   passWord = pass.getText().toString();
         	   
-        	   //check if bluetooth compatible
-        	   BeaconManager beaconManager = new BeaconManager(getApplicationContext());
-        	   if(!beaconManager.hasBluetooth()){
-        		   Toast.makeText(getApplicationContext(), "It appears that you do not support bluetooth.", 
-            			   Toast.LENGTH_LONG).show();
-        	   
-        	   }
-        	   else if(!beaconManager.isBluetoothEnabled()){
-        		   Toast.makeText(getApplicationContext(), "Please enable bluetooth and try again!", 
-            			   Toast.LENGTH_LONG).show();
-        	   }
-        	   else{
-        		   //BeaconConnection bc = new BeaconConnection
-        	   
-        	   }
-           	//PUT and GET array stuffs here
-
+              //have this open new activity
+        	   //HTTP STUFF
+        	   /* if(usernameFound && passwordMatches){
+        	    * 	Intent intent = new Intent(getApplicationContext(), Homepage.class);
+        	  startActivity(intent);
+        	    * }else{
+        	    * Intent intent = new Intent(getApplicationContext(), Register.class);
+        	  startActivity(intent);
+        	    * }
+        	  
+        	  */
            }
         });
         
-        arrays.add("Design");
-        arrays.add("Front-End");
-        arrays.add("Back-End");
-        arrays.add("Android");
-        arrays.add("IOS");
-        arrays.add("Windows");
-        
-        
-        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-        spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
-        	@Override
-        	public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            	switch((int)id){
-            		case 0:
-            			spInt1 = 0;
-            			break;
-            		case 1:
-            			spInt1 = 1;
-            			break;
-            		case 2:
-            			spInt1 = 2;
-            			break;
-            		case 3:
-            			spInt1 = 3;
-            			break;
-            		case 4:
-            			spInt1 = 4;
-            			break;
-            		case 5:
-            			spInt1 = 5;
-            			break;
-            		
-            		}
-            	}
-        	
-        	public void onNothingSelected(AdapterView<?> parent){
-            	
-            }
-        
-        });
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        spinner2.setOnItemSelectedListener(new OnItemSelectedListener(){
-        	@Override
-        	public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            	switch((int)id){
-            		case 0:
-            			spInt2 = 0;
-            			break;
-            		case 1:
-            			spInt2 = 1;
-            			break;
-            		case 2:
-            			spInt2 = 2;
-            			break;
-            		case 3:
-            			spInt2 = 3;
-            			break;
-            		case 4:
-            			spInt2 = 4;
-            			break;
-            		case 5:
-            			spInt2 = 5;
-            			break;
-            		
-            		}
-            	}
-        	
-        	public void onNothingSelected(AdapterView<?> parent){
-            	
-            }
-        
-        });
-        Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-        spinner3.setOnItemSelectedListener(new OnItemSelectedListener(){
-        	@Override
-        	public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            	switch((int)id){
-            		case 0:
-            			spInt3 = 0;
-            			break;
-            		case 1:
-            			spInt3 = 1;
-            			break;
-            		case 2:
-            			spInt3 = 2;
-            			break;
-            		case 3:
-            			spInt3 = 3;
-            			break;
-            		case 4:
-            			spInt3 = 4;
-            			break;
-            		case 5:
-            			spInt3 = 5;
-            			break;
-            		
-            		}
-            	}
-        	
-        	public void onNothingSelected(AdapterView<?> parent){
-            	
-            }
-        
-        });
-        
-        
-        // get reference to the views
-       /* etResponse = (EditText) findViewById(R.id.etResponse);
-        tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
- 
-        // check if you are connected or not
-        if(isConnected()){
-            tvIsConnected.setBackgroundColor(0xFF00CC00);
-            tvIsConnected.setText("You are conncted");
-        }
-        else{
-            tvIsConnected.setText("You are NOT conncted");
-        }
- 
-        // show response on the EditText etResponse 
-        etResponse.setText(GET("http://hmkcode.com/examples/index.php"));*/
+       
  
     }
    
 
  
-    public static String GET(String url){
-        InputStream inputStream = null;
-        String result = "";
-        try {
- 
-            // create HttpClient
-            HttpClient httpclient = new DefaultHttpClient();
- 
-            // make GET request to the given URL
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
- 
-            // receive response as inputStream
-            inputStream = httpResponse.getEntity().getContent();
- 
-            // convert inputstream to string
-            if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
-            else
-                result = "Did not work!";
- 
-        } catch (Exception e) {
-            Log.d("InputStream", ""+ e.getLocalizedMessage());
-        }
- 
-        return result;
-    }
- 
-    // convert inputstream to String
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
- 
-        inputStream.close();
-        return result;
- 
-    }
- 
-    // check network connection
-    public boolean isConnected(){
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-            if (networkInfo != null && networkInfo.isConnected()) 
-                return true;
-            else
-                return false;   
-    }
 }
