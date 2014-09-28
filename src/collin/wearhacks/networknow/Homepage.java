@@ -96,6 +96,9 @@ public class Homepage extends Activity {
 	        	   img.setImageDrawable(null);
 	        	   lay.removeAllViews();
 	        	   
+	        	   Intent intent = new Intent(getApplicationContext(), ListBeaconsActivity.class);
+	               intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, NotifyDemoActivity.class.getName());
+	               startActivity(intent);
 	        	   //findEstimote();
 	           }
 	        });

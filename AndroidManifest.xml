@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,6 +33,18 @@
         </activity>
         <activity
             android:name=".Register"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".NotifyDemoActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".ListBeaconsActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".LeDeviceListAdapter"
             android:label="@string/title_activity_register" >
         </activity>
     </application>
