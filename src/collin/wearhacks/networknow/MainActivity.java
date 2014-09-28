@@ -11,6 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 
 import android.net.ConnectivityManager;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
     EditText etResponse;
     TextView tvIsConnected;
     int spInt1, spInt2, spInt3;
+    String PUUID;
     ArrayList<String> arrays = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +57,20 @@ public class MainActivity extends Activity {
         	   Toast.makeText(getApplicationContext(), spInt1+""+spInt2+""+spInt3, 
         			   Toast.LENGTH_LONG).show();
         	   
-        	   //check if bluetooth enabled
+        	   //check if bluetooth compatible
         	   BeaconManager beaconManager = new BeaconManager(getApplicationContext());
         	   if(!beaconManager.hasBluetooth()){
         		   Toast.makeText(getApplicationContext(), "It appears that you do not support bluetooth.", 
             			   Toast.LENGTH_LONG).show();
         	   
         	   }
-        	   if(!beaconManager.isBluetoothEnabled()){
+        	   else if(!beaconManager.isBluetoothEnabled()){
         		   Toast.makeText(getApplicationContext(), "Please enable bluetooth and try again!", 
             			   Toast.LENGTH_LONG).show();
+        	   }
+        	   else{
+        		   //BeaconConnection bc = new BeaconConnection
+        	   
         	   }
            	//PUT and GET array stuffs here
 
