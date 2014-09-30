@@ -84,6 +84,8 @@ public class Homepage extends Activity {
         ImageButton pro = (ImageButton) findViewById(R.id.profileButton);
         ImageButton find = (ImageButton) findViewById(R.id.findButton);
         ImageButton log = (ImageButton) findViewById(R.id.logout);
+        final View vv = (View) findViewById(R.id.view);
+        		vv.setVisibility(View.GONE);
         
         final Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
         final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
@@ -105,13 +107,13 @@ public class Homepage extends Activity {
 	        	   
 	        	   
 	        	   spin2.setVisibility(View.VISIBLE);
-	        	   
+	        	   vv.setVisibility(View.VISIBLE);
 	        	
 	        	   
 	        	   TextView tv = new TextView(getApplicationContext());
 					tv.setText("Please Add Your Skills");
 					tv.setTextSize(25);
-					tv.setPadding(10, 10, 20, 10);
+					tv.setPadding(10, 70, 20, 10);
 					tv.setTypeface(null, Typeface.BOLD);
 					tv.setTextColor(Color.BLACK);
 					tv.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -134,7 +136,7 @@ public class Homepage extends Activity {
 	        	   TextView tv2 = new TextView(getApplicationContext());
 					tv2.setText("What Do You Need?");
 					tv2.setTextSize(25);
-					tv2.setPadding(10, 10, 20, 10);
+					tv2.setPadding(10, 70, 20, 10);
 					tv2.setTypeface(null, Typeface.BOLD);
 					tv2.setTextColor(Color.BLACK);
 					tv2.setGravity(Gravity.CENTER_HORIZONTAL);
